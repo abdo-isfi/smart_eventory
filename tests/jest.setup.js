@@ -1,3 +1,5 @@
+require('dotenv').config({ path: '.env.test' });
+
 const { connect, closeDatabase, clearDatabase } = require('./setup/test-db');
 
 beforeAll(async () => {
@@ -9,5 +11,5 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
-  await clearDatabase();
+  await clearDatabase(); // Re-enable global database clear (or for specific models)
 });

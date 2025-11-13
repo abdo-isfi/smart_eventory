@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
+const config = require('../config/config'); // Import config
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = config.jwt.secret;
 
 async function auth(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
-    console.log('Authorization Header:', authHeader); // Add this line for debugging
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({
@@ -16,7 +16,6 @@ async function auth(req, res, next) {
     }
 
     const token = authHeader.split(' ')[1];
-    console.log('Token:', token); // Add this line for debugging
 
     let payload;
     try {

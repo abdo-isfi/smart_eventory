@@ -1,9 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
+const config = require('../config/config'); // Import config
 
-const JWT_SECRET = process.env.JWT_SECRET || 'un_secret_long_et_difficile_a_deviner';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
+const JWT_SECRET = config.jwt.secret;
+const JWT_EXPIRES_IN = config.jwt.expiresIn;
 
 function generateToken(user) {
   // On ne met que le minimum d'informations dans le token

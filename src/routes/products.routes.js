@@ -8,8 +8,8 @@ const authorize = require("../middlewares/authorize");
 const { productSchema } = require("../validators/product.validator");
 const validate = require("../validators/validate");
 
-router.get("/", auth, productsController.getProducts);
-router.get("/:id", productsController.getProduct);
+router.get("/", productsController.getProducts);
+router.get("/:id", auth, productsController.getProduct);
 
 // Routes protégées : seulement les admins peuvent créer, modifier, supprimer
 router.post(

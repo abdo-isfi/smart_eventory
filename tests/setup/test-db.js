@@ -4,7 +4,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 let mongoServer;
 
 async function connect() {
-  mongoServer = await MongoMemoryServer.create();
+  mongoServer = await MongoMemoryServer.create({ debug: true }); // Add debug flag
   const uri = mongoServer.getUri();
 
   await mongoose.connect(uri);

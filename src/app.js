@@ -24,9 +24,14 @@ if (config.env === "development") {
 } else {
   app.use(morgan("combined"));
 }
+// Rate limiting
+if (config.env !== 'test') {
+  app.use("/api", apiLimiter);
+  app.use("/api/auth", authLimiter);
+}
+
 // Routes
-app.use("/api", apiLimiter);
-app.use("/api/auth", authLimiter, authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/orders", ordersRouter);
 // Route de santé

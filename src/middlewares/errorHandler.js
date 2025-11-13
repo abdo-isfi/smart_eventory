@@ -1,5 +1,14 @@
 function errorHandler(err, req, res, next) {
   console.error('Erreur non gérée:', err);
-  res.status(err.status || err.statusCode || 500).json({ status: 'error', message: err.message || 'Erreur interne du serveur' });
+
+  let statusCode = err.status || err.statusCode || 500;
+  let message = err.message || 'Erreur interne du serveur';
+
+  if (err.name === 'ValidationError') {
+    statusCode = 400;
+    message = 'Validation échouée';
+  }
+
+  res.status(statusCode).json({ status: 'error', message });
 }
 module.exports = errorHandler;
